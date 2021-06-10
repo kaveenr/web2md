@@ -1,0 +1,56 @@
+{
+  "name": "web2md",
+  "description": "Turn Web Articles To Readable Markdown",
+  "version": "0.1.0",
+  "author": "Kaveen Rodrigo @kaveenr",
+  "bin": {
+    "web2md": "./bin/run"
+  },
+  "bugs": "https://github.com/kaveenr/web2md/issues",
+  "dependencies": {
+    "@mozilla/readability": "^0.4.1",
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/plugin-help": "^3",
+    "@types/jsdom": "^16.2.11",
+    "@types/node-fetch": "^2.5.10",
+    "@types/turndown": "^5.0.0",
+    "jsdom": "^16.6.0",
+    "node-fetch": "^2.6.1",
+    "tslib": "^1",
+    "turndown": "^7.0.0"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1",
+    "@types/node": "^10",
+    "eslint": "^5.13",
+    "eslint-config-oclif": "^3.1",
+    "eslint-config-oclif-typescript": "^0.1",
+    "ts-node": "^8",
+    "typescript": "^3.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib"
+  ],
+  "homepage": "https://github.com/kaveenr/web2md",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "bin": "web2md"
+  },
+  "repository": "kaveenr/web2md",
+  "scripts": {
+    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev readme",
+    "test": "echo NO TESTS",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "types": "lib/index.d.ts"
+}
