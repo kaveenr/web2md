@@ -23,14 +23,6 @@ OPTIONS
 
 ```
 
-## Burden of maintaining old code
-
-```
-nvm use lts/gallium
-./bin/run --help
-npm publish
-```
-
 ## Installation
 
 after the following pre-requisites are met, 
@@ -48,6 +40,18 @@ npx web2md -h
 ## Powered By
 - [Mozilla's Amazing Readability Library](https://github.com/mozilla/readability)
 - [domchristie's turndown](https://github.com/domchristie/turndown)
+
+## Burden of maintaining old code
+
+Note to self on how to work on this
+
+```
+nvm use lts/gallium
+./bin/run --help
+npm publish
+```
+
+
 ## Licence
 
 ```

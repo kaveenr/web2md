@@ -12,7 +12,7 @@ class Web2Md extends Command {
   static flags = {
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
-    name: flags.string({char: 'o', description: 'output file path'}),
+    output: flags.string({char: 'o', description: 'output file path, if unspecified stdout'}),
     overwrite: flags.boolean({ char: 'f', description: 'overwrite file'})
   }
 
@@ -60,16 +60,20 @@ Extracted Date: ${today}
 ${markdown}
     `.trim()
     
-    // Output Document
-    let outFile = flags.name || `${today}-${article.title}.md`
-
-    // Don't overwrite if not specified
-    if (existsSync(outFile) && !flags.overwrite) {
-      this.error("File already exists")
+    // Write to stdout if output unspecified
+    if (!flags.output) {
+      this.log(output)
+      this.exit();
     }
 
-    writeFileSync(outFile, output, "utf-8");
-    this.log(`Wrote to file ${outFile}`);
+    // Don't overwrite if not specified
+    if (existsSync(flags.output) && !flags.overwrite) {
+      this.error("File already exists, use -f to overwrite")
+    }
+
+    // Write file
+    writeFileSync(flags.output, output, "utf-8");
+    this.log(`Wrote to file ${flags.output}`);
   }
 }
 
