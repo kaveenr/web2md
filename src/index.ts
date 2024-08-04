@@ -6,6 +6,10 @@ import { JSDOM } from 'jsdom';
 import  * as fetch from "node-fetch";
 import TurndownService = require('turndown');
 
+function formatDate(dt: Date) {
+  return dt.toISOString().slice(0, 10);
+}
+
 class Web2Md extends Command {
   static description = 'Convert Web Articles To Markdown'
 
@@ -43,23 +47,25 @@ class Web2Md extends Command {
     }
 
     // Convert To Markdown
-    var turndownService = new TurndownService()
+    var turndownService = new TurndownService({
+      headingStyle: 'atx'
+    })
     var markdown = turndownService.turndown(article.content);
 
     // Output Document
-    const today = new Date().toISOString().slice(0, 10)
-    const output = `
----
-Author: ${article.byline} 
-Site Name: ${article.siteName}
-Url: ${srcUrl}
-Published: ${article.publishedTime}
-Extracted Date: ${today}
----
-
-${markdown}
-    `.trim()
-    
+    const today = formatDate(new Date())
+    const output = [
+      "---",
+      `Author: ${article.byline}`,
+      `Site Name: ${article.siteName}`,
+      `Url: ${srcUrl}`,
+      `Published: ${article.publishedTime && formatDate(new Date(article.publishedTime))}`,
+      `Extracted Date: ${today}`,
+      "---",
+      "",
+      `${markdown}`
+    ].join("\n").trim();
+   
     // Write to stdout if output unspecified
     if (!flags.output) {
       this.log(output)

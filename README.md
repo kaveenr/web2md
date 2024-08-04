@@ -17,10 +17,10 @@ USAGE
   $ web2md URL
 
 OPTIONS
-  -h, --help       show CLI help
-  -o, --name=name  output file path
-  -v, --version    show CLI version
-
+  -f, --overwrite      overwrite file
+  -h, --help           show CLI help
+  -o, --output=output  output file path, if unspecified stdout
+  -v, --version        show CLI version
 ```
 
 ## Installation
