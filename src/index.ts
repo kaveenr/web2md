@@ -1,8 +1,9 @@
 import { Readability } from '@mozilla/readability';
 import {Command, flags} from '@oclif/command'
 import { writeFileSync } from 'fs';
+import { existsSync } from 'fs';
 import { JSDOM } from 'jsdom';
-import fetch from "node-fetch";
+import  * as fetch from "node-fetch";
 import TurndownService = require('turndown');
 
 class Web2Md extends Command {
@@ -12,6 +13,7 @@ class Web2Md extends Command {
     version: flags.version({char: 'v'}),
     help: flags.help({char: 'h'}),
     name: flags.string({char: 'o', description: 'output file path'}),
+    overwrite: flags.boolean({ char: 'f', description: 'overwrite file'})
   }
 
   static args = [{name: 'url', required: true}]
@@ -46,21 +48,28 @@ class Web2Md extends Command {
 
     // Output Document
     const today = new Date().toISOString().slice(0, 10)
-    const output = `# ${article.title}
-
-*Author:* ${article.byline}
-*Site Name:* ${article.siteName} 
-*Url:* ${srcUrl}
-*Extracted Date:* ${today}
+    const output = `
 ---
+Author: ${article.byline} 
+Site Name: ${article.siteName}
+Url: ${srcUrl}
+Published: ${article.publishedTime}
+Extracted Date: ${today}
+---
+
 ${markdown}
-    `
+    `.trim()
+    
     // Output Document
     let outFile = flags.name || `${today}-${article.title}.md`
 
-    this.log(`Writing to file ${outFile}`);
-    writeFileSync(outFile, output, "utf-8");
+    // Don't overwrite if not specified
+    if (existsSync(outFile) && !flags.overwrite) {
+      this.error("File already exists")
+    }
 
+    writeFileSync(outFile, output, "utf-8");
+    this.log(`Wrote to file ${outFile}`);
   }
 }
 

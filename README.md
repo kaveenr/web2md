@@ -23,6 +23,14 @@ OPTIONS
 
 ```
 
+## Burden of maintaining old code
+
+```
+nvm use lts/gallium
+./bin/run --help
+npm publish
+```
+
 ## Installation
 
 after the following pre-requisites are met, 

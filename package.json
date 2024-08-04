@@ -1,14 +1,14 @@
 {
   "name": "web2md",
   "description": "Turn Web Articles To Readable Markdown",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Kaveen Rodrigo @kaveenr",
   "bin": {
     "web2md": "./bin/run"
   },
   "bugs": "https://github.com/kaveenr/web2md/issues",
   "dependencies": {
-    "@mozilla/readability": "^0.4.1",
+    "@mozilla/readability": "^0.5.0",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
@@ -16,9 +16,9 @@
     "@types/node-fetch": "^2.5.10",
     "@types/turndown": "^5.0.0",
     "jsdom": "^16.6.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.7.0",
     "tslib": "^1",
-    "turndown": "^7.0.0"
+    "turndown": "^7.2.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
